@@ -12,7 +12,7 @@
 
 
 #define PACKAGE "lparse"
-#define VERSION "1.1.2"
+#define VERSION "1.1.3"
 
 #include <assert.h>
 /* Define to 1 if you have the <dlfcn.h> header file. */
