@@ -343,7 +343,7 @@ void RuntimeError::Print()
   output(cerr, "\n");
 }
 
-void runtime_error(InternalFunction, ErrorType t, long a1, long a2)  
+void lparse_runtime_error(InternalFunction, ErrorType t, long a1, long a2)  
 {
   RuntimeError rt(t, a1, a2);
   throw rt;

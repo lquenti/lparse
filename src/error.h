@@ -98,6 +98,6 @@ const char *error_file_and_line(long lineno);
 // target system.
 
 #include "term.h"
-void runtime_error(InternalFunction f, ErrorType t, long a1 = 0, long a2 = 0);
+void lparse_runtime_error(InternalFunction f, ErrorType t, long a1 = 0, long a2 = 0);
 
 #endif

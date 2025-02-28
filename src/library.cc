@@ -164,7 +164,7 @@ long int_plus(int nargs, long *args )
 
   for (i=0; i < nargs; i++) {
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_PLUS, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_PLUS, ERR_ARGUMENT, args[i]);
 
     result += args[i];
   }
@@ -175,25 +175,25 @@ long int_plus(int nargs, long *args )
 long int_exp(int nargs, long *args )
 {
   if (nargs != 2) {
-    runtime_error(FUN_EXP, ERR_NUMARGS, 2);
+    lparse_runtime_error(FUN_EXP, ERR_NUMARGS, 2);
   }
   long base = args[0];
   long power = args[1];
   long result = 1;
   
   if (IS_CONSTANT(args[0])) 
-    runtime_error(FUN_EXP, ERR_ARGUMENT, args[0]);
+    lparse_runtime_error(FUN_EXP, ERR_ARGUMENT, args[0]);
 
   if (IS_CONSTANT(args[1])) 
-    runtime_error(FUN_EXP, ERR_ARGUMENT, args[1]);
+    lparse_runtime_error(FUN_EXP, ERR_ARGUMENT, args[1]);
 
   if (power < 0)
-    runtime_error(FUN_EXP, ERR_ARGUMENT, args[1]);
+    lparse_runtime_error(FUN_EXP, ERR_ARGUMENT, args[1]);
   
   while (power--) {
     result *= base;
     if (IS_CONSTANT(result))
-      runtime_error(FUN_EXP, ERR_OVERFLOW, 0);
+      lparse_runtime_error(FUN_EXP, ERR_OVERFLOW, 0);
   }
   return result;
 }
@@ -201,16 +201,16 @@ long int_exp(int nargs, long *args )
 long int_norm(int nargs, long *args)
 {
   if (nargs != 1) {
-    runtime_error(FUN_NORM, ERR_NUMARGS, 1);
+    lparse_runtime_error(FUN_NORM, ERR_NUMARGS, 1);
   }
   
   if (args[0] < 0 || args[0] > predicate_table->Size())
-    runtime_error(FUN_NORM, ERR_RANGE, args[0]);
+    lparse_runtime_error(FUN_NORM, ERR_RANGE, args[0]);
 
   long p = args[0];
 
   if (!predicates[p]->DomainPredicate())
-    runtime_error(FUN_NORM, ERR_NONFIXED_EXTENSION, args[0]);
+    lparse_runtime_error(FUN_NORM, ERR_NONFIXED_EXTENSION, args[0]);
   
   if (predicates[p]->atoms)
     return predicates[p]->atoms->Size();
@@ -258,11 +258,11 @@ long int_minus(int nargs, long *args)
   result = args[0];
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_MINUS, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_MINUS, ERR_ARGUMENT, args[i]);
  
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_MINUS, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_MINUS, ERR_ARGUMENT, args[i]);
 
     result -= args[i];
   }
@@ -277,7 +277,7 @@ long int_abs(int, long *args)
   result = args[0];
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_ABS, ERR_ARGUMENT, result);
+    lparse_runtime_error(FUN_ABS, ERR_ARGUMENT, result);
       
   
   if (result < 0)
@@ -300,7 +300,7 @@ long int_le(int nargs, long *args)
 
   for (i = 1 ; i < nargs; i++ ) { // '1' intentional
     if (IS_CONSTANT(args[i]))
-      runtime_error(FUN_LE, ERR_INVALID_COMPARE, args[0], args[i]);
+      lparse_runtime_error(FUN_LE, ERR_INVALID_COMPARE, args[0], args[i]);
     
     if (args[i] < prior_value) {
       result = 0;
@@ -324,7 +324,7 @@ long int_ge(int nargs, long *args)
   
   for (i = 1 ; i < nargs; i++ ) { // '1' intentional
     if (IS_CONSTANT(args[i]))
-      runtime_error(FUN_GE, ERR_INVALID_COMPARE, args[0],args[i]);
+      lparse_runtime_error(FUN_GE, ERR_INVALID_COMPARE, args[0],args[i]);
 
     
     if (args[i] > prior_value) {
@@ -349,7 +349,7 @@ long int_gt(int nargs, long *args)
   
   for (i = 1 ; i < nargs; i++ ) { // '1' intentional
     if (IS_CONSTANT(args[i]))
-      runtime_error(FUN_GT, ERR_INVALID_COMPARE, args[0],args[i]);
+      lparse_runtime_error(FUN_GT, ERR_INVALID_COMPARE, args[0],args[i]);
 
     if (args[i] >= prior_value) {
       result = 0;
@@ -373,7 +373,7 @@ long int_lt(int nargs, long *args)
   
   for (i = 1 ; i < nargs; i++ ) { // '1' intentional
     if (IS_CONSTANT(args[i]))
-      runtime_error(FUN_LT, ERR_INVALID_COMPARE, args[0], args[i]);
+      lparse_runtime_error(FUN_LT, ERR_INVALID_COMPARE, args[0], args[i]);
 
     if (args[i] <= prior_value) {
       result = 0;
@@ -408,11 +408,11 @@ long int_times(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_TIMES, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_TIMES, ERR_ARGUMENT, args[i]);
 
   for (i = 0; i < nargs; i++) {
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_TIMES, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_TIMES, ERR_ARGUMENT, args[i]);
 
     result *= args[i];
   }
@@ -425,14 +425,14 @@ long int_div(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_DIV, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_DIV, ERR_ARGUMENT, args[i]);
 
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_DIV,ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_DIV,ERR_ARGUMENT, args[i]);
     
     if (args[i] == 0) {
-      runtime_error(FUN_DIV,ERR_DIVIDE_BY_ZERO, 0); 
+      lparse_runtime_error(FUN_DIV,ERR_DIVIDE_BY_ZERO, 0); 
     } else {
       result /= args[i];
     }
@@ -446,14 +446,14 @@ long int_mod(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_MOD, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_MOD, ERR_ARGUMENT, args[i]);
 
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_MOD, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_MOD, ERR_ARGUMENT, args[i]);
 
     if (args[i] == 0) {
-      runtime_error(FUN_MOD, ERR_DIVIDE_BY_ZERO, 0); 
+      lparse_runtime_error(FUN_MOD, ERR_DIVIDE_BY_ZERO, 0); 
     } else {
       result %= args[i];
       if (result < 0)
@@ -469,11 +469,11 @@ long int_and(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_AND, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_AND, ERR_ARGUMENT, args[i]);
   
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_AND, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_AND, ERR_ARGUMENT, args[i]);
     
     result &= args[i];
   }
@@ -486,11 +486,11 @@ long int_or(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_OR, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_OR, ERR_ARGUMENT, args[i]);
 
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_OR, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_OR, ERR_ARGUMENT, args[i]);
 
     result |= args[i];
   }
@@ -503,11 +503,11 @@ long int_xor(int nargs, long *args)
   int i = 0;
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_XOR, ERR_ARGUMENT, args[i]);
+    lparse_runtime_error(FUN_XOR, ERR_ARGUMENT, args[i]);
 
   for (i = 1; i < nargs; i++) { // '1' intentional
     if (IS_CONSTANT(args[i])) 
-      runtime_error(FUN_XOR, ERR_ARGUMENT, args[i]);
+      lparse_runtime_error(FUN_XOR, ERR_ARGUMENT, args[i]);
 
     result ^= args[i];
   }
@@ -520,7 +520,7 @@ long int_not(int, long *args)
   long result = args[0];
 
   if (IS_CONSTANT(result)) 
-    runtime_error(FUN_NOT, ERR_ARGUMENT, result);
+    lparse_runtime_error(FUN_NOT, ERR_ARGUMENT, result);
   
   result = ~result;
   return result;
@@ -540,7 +540,7 @@ long lt_string(int nargs, long *args)
   for (int i = 1; i < nargs; i++) {
     second = constant_table->LookupByValue(args[i]);
     if (!second)
-      runtime_error(FUN_LT, ERR_INVALID_COMPARE, args[0], args[i]);
+      lparse_runtime_error(FUN_LT, ERR_INVALID_COMPARE, args[0], args[i]);
 
     if (strcmp(first, second) >= 0) {
       result = 0;
@@ -564,7 +564,7 @@ long le_string(int nargs, long *args)
   for (int i = 1; i < nargs; i++) {
     second = constant_table->LookupByValue(args[i]);
     if (!second)
-      runtime_error(FUN_LE, ERR_INVALID_COMPARE,args[0], args[i]);
+      lparse_runtime_error(FUN_LE, ERR_INVALID_COMPARE,args[0], args[i]);
 
     if (strcmp(first, second) > 0) {
       result = 0;
@@ -589,7 +589,7 @@ long gt_string(int nargs, long *args)
   for (int i = 1; i < nargs; i++) {
     second = constant_table->LookupByValue(args[i]);
     if (!second)
-      runtime_error(FUN_GT, ERR_INVALID_COMPARE, args[0],args[i]);
+      lparse_runtime_error(FUN_GT, ERR_INVALID_COMPARE, args[0],args[i]);
 
     if (strcmp(first, second) <= 0) {
       result = 0;
@@ -614,7 +614,7 @@ long ge_string(int nargs, long *args)
   for (int i = 1; i < nargs; i++) {
     second = constant_table->LookupByValue(args[i]);
     if (!second)
-      runtime_error(FUN_GE, ERR_INVALID_COMPARE,args[0], args[i]);
+      lparse_runtime_error(FUN_GE, ERR_INVALID_COMPARE,args[0], args[i]);
 
     if (strcmp(first, second) < 0) {
       result = 0;
