@@ -122,7 +122,7 @@ public:
   bool is_weight_function;
   bool accept_constants;
   bool negative;
-  bool allocated;
+  char allocated; // Was originally a bool
 };
 
 class Range : public Term
