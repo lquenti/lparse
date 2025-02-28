@@ -1,3 +1,9 @@
+This is lparse 1.1.2, patched to run on modern Linux.
+
+Original Website: http://www.tcs.hut.fi/Software/smodels/
+
+Original Readme:
+---
 LPARSE 1.1.2 -- a front-end for smodels
 
 Lparse is a front end for smodels system, that takes a
