@@ -34,7 +34,7 @@ while (my $arg = shift) {
 # The first step is to create a temporary file name using the method
 # from PerlFAQ.
 use IO::File;
-use POSIX qw(tmpnam);
+use File::Temp qw(tmpnam);
 my $name;
 do {
   $name = tmpnam();
