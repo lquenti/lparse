@@ -1,6 +1,10 @@
-This is lparse 1.1.2, patched to run on modern Linux.
+This is lparse 1.1.3, patched to run on modern Linux.
 
 Original Website: http://www.tcs.hut.fi/Software/smodels/
+
+Changelog:
+- 1.1.3: Fix it up to run on modern Linux
+- 1.1.2: Initial Import to GitHub
 
 Original Readme:
 ---
