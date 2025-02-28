@@ -76,7 +76,7 @@ extern LongList *command_line_constants;
 
 extern LiteralList *implicit_domain_list;
 
-unsigned long hash(const char *key, unsigned long length,
+unsigned long evahash(const char *key, unsigned long length,
 		   unsigned long initval);
 
 // replacement of strdup that is not standard

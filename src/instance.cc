@@ -305,7 +305,7 @@ void HashSet::Clear(int new_ar)
 }
 
 
-unsigned long hash(const char *key, unsigned long length,
+unsigned long evahash(const char *key, unsigned long length,
 		   unsigned long initval)
 {
   u4 a, b, c; /* internal state */
@@ -362,9 +362,9 @@ unsigned long HashSet::FindIndex(Instance *key, unsigned long mask)
   else
     table = items;
   
-  ind1 = hash((char *)key, arity*4, SEED_1) % mask;
+  ind1 = evahash((char *)key, arity*4, SEED_1) % mask;
   if (table[ind1] && !equal_item(key, table[ind1], arity))
-    ind2 = (hash((char *)key, arity*4, SEED_2) % mask) + 1;
+    ind2 = (evahash((char *)key, arity*4, SEED_2) % mask) + 1;
   else
     return ind1;
 

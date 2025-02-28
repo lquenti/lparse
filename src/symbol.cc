@@ -127,9 +127,9 @@ unsigned long SymbolTable::FindIndex(const char *key, long mask)
   else
     table = items;
   
-  ind1 = hash(key, strlen(key), SEED_1) % mask;
+  ind1 = evahash(key, strlen(key), SEED_1) % mask;
   if (table[ind1] && strcmp(key, table[ind1]->symbol))
-    ind2 = (hash(key, strlen(key), SEED_2) % mask) + 1;
+    ind2 = (evahash(key, strlen(key), SEED_2) % mask) + 1;
   else 
     return ind1;
 
@@ -398,9 +398,9 @@ unsigned long FunctionTable::FindIndex(const char *key, long mask)
   else
     table = items;
   
-  ind1 = hash(key, strlen(key), SEED_1) % mask;
+  ind1 = evahash(key, strlen(key), SEED_1) % mask;
   if (table[ind1] && strcmp(key, table[ind1]->symbol))
-    ind2 = (hash(key, strlen(key), SEED_2) % mask) + 1;
+    ind2 = (evahash(key, strlen(key), SEED_2) % mask) + 1;
   else
     return ind1;
 
