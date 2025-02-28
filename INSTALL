@@ -4,6 +4,9 @@ LPARSE INSTALLATION GUIDE
 The Short Installation Guide
 ----------------------------
 
+Dependencies needed:
+ - Bison
+
 Run:
 
  1. configure
