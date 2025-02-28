@@ -25,7 +25,7 @@ parse.h : parse.cc
 parse.cc : parse.yy parsetree.h debug.h global.h defines.h \
   extern.h term.h literal.h list.h instance.h iterate.h rule.h array.h \
   priority.h symbol.h error.h
-	$(YACC) -o parse.cc parse.yy && mv parse.cc.h parse.h
+	$(YACC) -o parse.cc parse.yy && cp parse.cc.h parse.h
 
 
 array.o: array.cc config.h global.h defines.h extern.h array.h debug.h \
