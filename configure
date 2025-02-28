@@ -124,7 +124,7 @@ if ($debug_makefile) {
   print OUT "CFLAGS=-g -Wall\n";
   print OUT "LDFLAGS=-g -Wall\n";
 } else {
-  print OUT "CFLAGS=-O3\n";
+  print OUT "CFLAGS=-std=c++03 -O3\n";
   print OUT "LDFLAGS=-O3\n";
 }
 
